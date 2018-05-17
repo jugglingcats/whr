@@ -1,0 +1,17 @@
+{
+  "compilerOptions": {
+    "sourceMap": false,
+    "outDir": "dist",
+    "module": "commonjs",
+    "target": "es5",
+    "lib": ["es6"],
+    "moduleResolution": "node",
+    "types": ["node"]
+  },
+  "files": [
+    "src/whr-app.ts"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
+}

@@ -1,0 +1,85 @@
+.App {
+    text-align: center;
+}
+
+.App-logo {
+    animation: App-logo-spin infinite 20s linear;
+    height: 80px;
+}
+
+.App-header {
+    background-color: #222;
+    height: 80px;
+    padding: 20px;
+    color: white;
+}
+
+.App-title {
+    font-size: 1.5em;
+}
+
+.App-intro {
+    font-size: large;
+}
+
+@keyframes App-logo-spin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+table {
+    width: 60%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+tbody > tr > td {
+    text-align: right;
+}
+
+table {
+    border-collapse: collapse;
+    /*border: 1px solid #628cff;*/
+}
+
+table td {
+    border: 1px solid rgba(122, 164, 255, 0.59);
+}
+
+td.name {
+    width: 30%;
+    text-align: left;
+}
+
+td.name > input {
+    width: 100%
+}
+
+td.price {
+    text-align: left;
+}
+
+td.price > input {
+    width: 100%
+}
+
+td.table-centre {
+    text-align: center;
+}
+td.table-left {
+    text-align: left;
+}
+
+td.actions {
+    text-align: center;
+    white-space: nowrap;
+}
+
+td.date {
+    white-space: nowrap;
+}
+
