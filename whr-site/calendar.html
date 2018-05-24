@@ -7,11 +7,21 @@
 
     <link rel="stylesheet" href="/css/styles.css"/>
 
-    <script src="js/calendar.js"></script>
+    <script src="src/js/calendar.js"></script>
 </head>
 <body>
 
-<div id="calendar"></div>
+<div class="calendar-dev">
+    <div id="calendar">
+        <div class="month">
+            <div class="month-title">White House Availability</div>
+            <p class="calendar-text">Drag to view all months</p>
+            <div class="key week-available">Available Week</div>
+            <div class="key week-unavailable">Unavailable Week</div>
+            <div class="key week-special">Special Offer Week</div>
+        </div>
+    </div>
+</div>
 
 <script>
     function init() {

@@ -1,0 +1,50 @@
+.flickity-button, .flickity-button:focus, .flickity-button:active, .flickity-button:hover {
+  background: hsla(0, 0%, 100%, 0.34);
+}
+
+#carousel {
+  margin-bottom: 30px;
+}
+
+#further-info {
+  color: white;
+  margin-bottom: 30px;
+  //.further-info-wrapper:after {
+  //  content: "";
+  //  display: table;
+  //  clear: both;
+  //}
+  .further-info-wrapper {
+    margin-left: 30px;
+    display: grid;
+    grid-template-columns: auto;
+    h1 {
+      font-size: 20px;
+    }
+    .further-info-block {
+      margin: 10px;
+    }
+  }
+}
+
+@media only screen and (min-width: 480px) {
+  #further-info .further-info-wrapper {
+    grid-template-columns: auto auto;
+  }
+}
+
+@media only screen and (min-width: 1280px) {
+  #further-info .further-info-wrapper {
+    grid-template-columns: auto auto auto;
+  }
+}
+
+@media only screen and (min-width: 1440px) {
+  #further-info .further-info-wrapper {
+    grid-template-columns: auto auto auto auto;
+  }
+}
+
+.map-marker path {
+  fill: #5f9a5f;
+}

@@ -197,12 +197,12 @@ textarea {
    Author: Jonathan Verrecchia - verekia.com/initializr/responsive-template
    ========================================================================== */
 body {
-  font: 16px/1.5 'Raleway', Helvetica, Helvetica Neue, Arial, sans-serif;
+  font: 16px/1.5 'Lato', Helvetica, Helvetica Neue, Arial, sans-serif;
   background-color: #212121; }
 
 .wrapper {
-  width: 90%;
-  margin: 0 5%; }
+  width: 80%;
+  margin: 0 10%; }
 
 /* Make the body 100% of the browser viewport height */
 html, body {
@@ -218,43 +218,6 @@ h1 {
 /* ==========================================================================
    Author's custom styles
    ========================================================================== */
-/* =Preloader */
-#preloader {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  z-index: 101;
-  background-color: #212121;
-  color: #ffffff; }
-  #preloader .txt {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%); }
-  #preloader .txt-perc {
-    font-size: 35px;
-    font-family: 'Roboto Condensed', Helvetica, Helvetica Neue, Arial, sans-serif;
-    opacity: 1;
-    margin: 0 0 6px 0;
-    max-width: 400px;
-    text-align: center; }
-  #preloader .progress {
-    width: 100px;
-    height: 3px;
-    background-color: rgba(255, 255, 255, 0.2);
-    margin: 0 auto 15px auto; }
-    #preloader .progress span {
-      display: block;
-      width: 0;
-      height: 100%;
-      background-color: rgba(255, 255, 255, 0.8); }
-  #preloader.is-hidden {
-    visibility: hidden;
-    opacity: 0; }
-
-.is-loading {
-  overflow: hidden; }
-
 /* =Header */
 .header-container {
   text-align: center;
@@ -263,12 +226,6 @@ h1 {
     padding-top: 120px;
     z-index: 2;
     position: relative; }
-  .header-container .bcg {
-    transition: transform 4s ease-out;
-    transform: scale(1.5);
-    transform-origin: top center; }
-  .header-container.is-loaded .bcg {
-    transform: scale(1); }
 
 .bcg {
   background: no-repeat center center;
@@ -277,10 +234,11 @@ h1 {
   width: 100%;
   height: 100%;
   z-index: 1;
-  opacity: 0.5; }
+  opacity: 1; }
   .header-container .bcg {
-    background-image: url(/img/whitehouse.jpg);
-    background-size: cover; }
+    background-image: url(/img/hero/whitehouse.jpg);
+    background-size: cover;
+    opacity: 1; }
   #slide01 .bcg {
     background: url(/img/weymouth_view.jpg) no-repeat center center;
     background-size: cover; }
@@ -288,7 +246,7 @@ h1 {
     background: url(/img/morning_view.jpg) no-repeat center center;
     background-size: cover; }
   #slide03 .bcg {
-    background: url(/img/teacup.jpg) no-repeat center center;
+    background: url(/img/house_from_clifftop.jpg) no-repeat center center;
     background-size: cover;
     opacity: 0.7; }
 
@@ -455,25 +413,16 @@ p {
   width: 100px;
   margin-bottom: 30px; }
 
-#intro header {
-  text-align: left; }
-
 /* ==========================================================================
    Media Queries
    ========================================================================== */
 @media only screen and (min-width: 768px) {
+  body {
+    font-weight: 100; }
   h1 {
     font-size: 3em; }
   p {
     font-size: 20px; }
-  .scroll-hint {
-    font-size: 20px; }
-  .content-block .wrapper {
-    padding: 120px 0; } }
-
-@media only screen and (min-width: 0px) {
-  body {
-    font-weight: 100; }
   /* =Header */
   .header-container {
     overflow: hidden;
@@ -482,15 +431,18 @@ p {
       position: absolute;
       top: 50%;
       left: 50%;
-      transform: translate(-50%, -140%);
+      transform: translate(-50%, -120%);
       margin: 0;
       padding: 0; }
     .header-container:before {
       font-size: 70em; }
+  .scroll-hint {
+    font-size: 20px; }
   .bcg {
     opacity: 1; }
   .slide {
-    overflow: hidden; }
+    overflow: hidden;
+    overflow-x: hidden; }
     .slide section {
       max-width: 400px; }
     .slide .wrapper {
@@ -509,6 +461,8 @@ p {
         text-align: center; }
       .slide#slide01 section, .slide#slide02 section, .slide#slide03 section {
         margin: 0 auto; }
+    .slide#slide01 {
+      color: #ffffff; }
     .slide#slide02 {
       color: #ffffff; }
       .slide#slide02 .wrapper {
@@ -534,7 +488,9 @@ p {
     .slide#slide03 .bcg {
       opacity: 1; }
   nav {
-    display: block; } }
+    display: block; }
+  .content-block .wrapper {
+    padding: 120px 0; } }
 
 /* ==========================================================================
    Helper classes
@@ -617,18 +573,128 @@ p {
   h3 {
     page-break-after: avoid; } }
 
-.day {
-  fill: green; }
+div.key {
+  margin: 4px;
+  padding: 4px;
+  width: 287px;
+  font-family: sans-serif;
+  color: black;
+  text-align: center; }
 
-.day-in-month {
-  fill: red; }
+.day {
+  fill: rgba(230, 230, 230, 0.33); }
+
+div.week-unavailable {
+  background: rgba(230, 230, 230, 0.33); }
+
+g.week-available > g > .day {
+  fill: #5f9a5f; }
+
+div.week-available {
+  background: #5f9a5f; }
+
+g.price > rect {
+  fill: none; }
+
+g.price-offer > rect {
+  stroke: white;
+  stroke-dasharray: 1px, 4px;
+  fill: rgba(0, 128, 0, 0.4); }
+
+div.week-special {
+  border: dashed rgba(185, 185, 185, 0.69) 1px;
+  padding: 3px !important;
+  color: #b7cbba !important;
+  background: rgba(0, 128, 0, 0.4); }
+
+g.price > text {
+  alignment-baseline: middle;
+  fill: #b7cbba;
+  font-weight: bold; }
 
 .day-num {
   alignment-baseline: middle;
-  text-anchor: middle; }
+  text-anchor: middle;
+  font-family: sans-serif;
+  color: black; }
 
 .month-title {
-  color: lightgrey; }
+  color: lightgrey;
+  font-size: 20px; }
+
+.calendar-dev > div > div.month {
+  display: inline-block; }
+
+div.month {
+  vertical-align: top;
+  /*
+  padding-left: 16px;
+  */
+  padding: 10px;
+  background: black;
+  margin-right: 20px;
+  /*
+  border-left: rgb(33, 33, 33) solid 6px;
+  */ }
+
+div.month > div.month-inner > svg {
+  width: 249px;
+  height: 181px; }
+
+@media only screen and (min-width: 768px) {
+  div.month > div.month-inner > svg {
+    width: 310px;
+    height: 224px; } }
+
+div.month.is-selected {
+  background: #0d0d3e45; }
+
+.calendar-container {
+  margin-top: 30px;
+  margin-bottom: 30px; }
+
+text.day-label {
+  fill: white;
+  text-anchor: middle;
+  font-size: 14px; }
+
+.calendar-text {
+  color: grey;
+  font-size: 16px;
+  text-align: center; }
+
+.flickity-button, .flickity-button:focus, .flickity-button:active, .flickity-button:hover {
+  background: rgba(255, 255, 255, 0.34); }
+
+#carousel {
+  margin-bottom: 30px; }
+
+#further-info {
+  color: white;
+  margin-bottom: 30px; }
+  #further-info .further-info-wrapper {
+    margin-left: 30px;
+    display: grid;
+    grid-template-columns: auto; }
+    #further-info .further-info-wrapper h1 {
+      font-size: 20px; }
+    #further-info .further-info-wrapper .further-info-block {
+      margin: 10px; }
+
+@media only screen and (min-width: 480px) {
+  #further-info .further-info-wrapper {
+    grid-template-columns: auto auto; } }
+
+@media only screen and (min-width: 1280px) {
+  #further-info .further-info-wrapper {
+    grid-template-columns: auto auto auto; } }
+
+@media only screen and (min-width: 1440px) {
+  #further-info .further-info-wrapper {
+    grid-template-columns: auto auto auto auto; } }
+
+.map-marker path {
+  fill: #5f9a5f; }
 
 @media print {
   * {

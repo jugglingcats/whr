@@ -16,20 +16,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="apple-touch-icon" href="apple-touch-icon.png">
 
-    <link href="https://fonts.googleapis.com/css?family=Raleway:400,100|Roboto+Condensed:700" rel="stylesheet"
-          type="text/css">
-    <link rel="stylesheet" href="css/styles.css">
+    <link href="https://fonts.googleapis.com/css?family=Lato:400|Roboto+Condensed:700" rel="stylesheet" type="text/css">
 
     <link rel="icon" href="/favicon.ico" type="image/x-icon"/>
     <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon"/>
 
-    <link rel="stylesheet" type="text/css"
-          href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.css"/>
-    <link rel="stylesheet" type="text/css"
-          href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick-theme.min.css"/>
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.css"/>
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick-theme.min.css"/>
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/flickity/2.1.1/flickity.min.css" rel="stylesheet">
+
+    <link href="https://vjs.zencdn.net/6.9.0/video-js.css" rel="stylesheet">
 
     <script src="js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
 
+    <link rel="stylesheet" href="css/styles.css">
 </head>
 <body class="is-loading">
 <!--[if lt IE 8]>
@@ -37,22 +38,18 @@
     your browser</a> to improve your experience.</p>
 <![endif]-->
 
-<div id="preloader">
-    <div class="txt">
-        <p class="txt-perc">0%</p>
-        <div class="progress"><span></span></div>
-    </div>
-</div>
-
 <div id="intro" class="header-container fs">
     <div class="bcg"></div>
-    <header class="wrapper">
-        <h1 class="title">White House Ringstead</h1>
-        <p>Beautiful secluded coastal cottage</p>
-    </header>
+    <!--
+        <header class="wrapper">
+            <h1 class="title">White House Ringstead</h1>
+            <p>Beautiful secluded coastal cottage</p>
+        </header>
+    -->
     <span class="scroll-hint">Scroll Down</span>
 </div>
 
+<!--
 <nav>
     <ul>
         <li><a href="#intro"><span class="nav-dot"></span><span class="nav-label">Intro</span></a></li>
@@ -61,11 +58,15 @@
         <li><a href="#slide03"><span class="nav-dot"></span><span class="nav-label">Download</span></a></li>
     </ul>
 </nav>
+-->
 
 <div id="main" class="main-container">
 
     <article id="cb01" class="content-block">
         <div class="wrapper">
+            <header class="slideInUp">
+                <h1>WHITE HOUSE RINGSTEAD</h1>
+            </header>
             <section>
                 <p class="slideInUp slideInUp2">Ringstead Bay is scheduled as a place of Outstanding Natural Beauty and
                     the coastline has World Heritage status. The eastern part of Ringstead belongs to the National
@@ -81,9 +82,46 @@
             </section>
         </div>
     </article>
+
     <article class="content-block">
-        <div id="carousel"
-             data-slick='{ "slidesToShow": 4, "centerMode": true, "variableWidth": true, "swipeToSlide": true }'>
+        <div class="videocontent">
+            <video data-setup='{"fluid": true}' id="whr-video" class="video-js vjs-big-play-centered" controls loop>
+                <source
+                        src="hls/whr/playlist.m3u8"
+                        type="application/x-mpegURL">
+            </video>
+        </div>
+    </article>
+
+    <article id="cb02" class="content-block">
+        <div class="calendar-container">
+            <div id="calendar">
+                <div class="month">
+                    <div class="month-inner">
+                        <div class="month-title">White House Availability</div>
+                        <p class="calendar-text">Drag to view all months</p>
+                        <div class="key week-available">Available</div>
+                        <div class="key week-unavailable">Unavailable</div>
+                        <div class="key week-special">Special Offer</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </article>
+
+    <!--<article id="cb02" class="content-block">-->
+    <!--<div class="wrapper">-->
+    <!--<header class="slideInUp">-->
+    <!--<h1>CALENDAR / AVAILABILITY GOES HERE</h1>-->
+    <!--</header>-->
+    <!--<section>-->
+    <!--<p class="slideInUp slideInUp2">Please contact us for details</p>-->
+    <!--</section>-->
+    <!--</div> &lt;!&ndash; .wrapper &ndash;&gt;-->
+    <!--</article>-->
+
+    <article class="content-block">
+        <div id="carousel">
             <div><img width="500" height="335" src="/img/gallery/pic1.jpg"></div>
             <div><img width="500" height="335" src="/img/gallery/pic2.jpg"></div>
             <div><img width="500" height="335" src="/img/gallery/pic3.jpg"></div>
@@ -106,26 +144,64 @@
         <!--</div> &lt;!&ndash; .wrapper &ndash;&gt;-->
     </article>
 
+    <article id="further-info">
+        <div class="further-info-wrapper">
+            <div class="further-info-block">
+                <h1>Bedrooms (sleeps 11)</h1>
+                <div>Master upstairs double bedroom</div>
+                <div>Small upstairs double bedroom</div>
+                <div>Dorm with bunkbed and three singles</div>
+                <div>Downstairs bedroom with twin beds</div>
+                <div>Travel cot</div>
+                <div>Upstairs bathroom with bath and shower</div>
+                <div>Downstairs wc and wash basin</div>
+            </div>
+
+            <div class="further-info-block">
+                <h1>Kitchen</h1>
+                <div>Electric hob and double oven</div>
+                <div>Dishwasher</div>
+                <div>Microwave</div>
+                <div>Fridge/freezer (x2)</div>
+                <div>Washing machine and dryer</div>
+            </div>
+
+            <div class="further-info-block">
+                <h1>Misc</h1>
+                <div>Freesat TV with Chromecast and DVD player</div>
+                <div>Bluetooth speaker with aux in</div>
+                <div>Open fire</div>
+                <div>Barbecue</div>
+                <div>Private drive/parking</div>
+                <div>Private gardens</div>
+                <div>Children's swings</div>
+            </div>
+
+            <div class="further-info-block">
+                <h1>Services (included in price)</h1>
+                <div>Electricity and heating</div>
+                <div>Wireless broadband</div>
+                <div>Bed linen service</div>
+                <div>Landline telephone (incoming calls only)</div>
+
+                <div>&nbsp;</div>
+                <div>Friday changeover</div>
+                <div>The White House, Ringstead Bay, Dorset DT2 8NG</div>
+                <div>View on Google Maps
+                    <svg class="map-marker" width="40" height="40" viewBox="0 0 1792 1792"><path d="M1152 640q0-106-75-181t-181-75-181 75-75 181 75 181 181 75 181-75 75-181zm256 0q0 109-33 179l-364 774q-16 33-47.5 52t-67.5 19-67.5-19-46.5-52l-365-774q-33-70-33-179 0-212 150-362t362-150 362 150 150 362z"/></svg>
+                </div>
+            </div>
+        </div>
+    </article>
+
     <article id="slide01" class="slide fs">
         <div class="bcg"></div>
         <div class="wrapper">
             <header class="slideInUp">
-                <h1>Switzerland</h1>
+                <h1>Miles of beautiful coastline</h1>
             </header>
             <section>
-                <p class="slideInUp slideInUp2">Switzerland is not that great: remove the mountains and what's left
-                    ?</p>
-            </section>
-        </div> <!-- .wrapper -->
-    </article>
-
-    <article id="cb02" class="content-block">
-        <div class="wrapper">
-            <header class="slideInUp">
-                <h1>THE ADVENTURE</h1>
-            </header>
-            <section>
-                <p class="slideInUp slideInUp2">Getting to the top is optional. Getting down is mandatory.</p>
+                <p class="slideInUp slideInUp2">Hike to Lulworth or stroll across the fields to the nearest pub</p>
             </section>
         </div> <!-- .wrapper -->
     </article>
@@ -134,11 +210,10 @@
         <div class="bcg"></div>
         <div class="wrapper">
             <header class="slideInUp">
-                <h1>The Climbing Addiction</h1>
+                <h1>Relax and unwind</h1>
             </header>
             <section>
-                <p class="slideInUp slideInUp2">Climbing is hard to give up, it's just as hard to give up as
-                    cigarettes.</p>
+                <p class="slideInUp slideInUp2">Many people fall in love with the place and come back year after year</p>
             </section>
         </div> <!-- .wrapper -->
     </article>
@@ -146,10 +221,10 @@
     <article id="cb03" class="content-block">
         <div class="wrapper">
             <header class="slideInUp">
-                <h1>THE CHALLENGE</h1>
+                <h1>CONTACT FORM GOES HERE</h1>
             </header>
             <section>
-                <p class="slideInUp slideInUp2">When you get to the summit of the mountain, keep climbing.</p>
+                <p class="slideInUp slideInUp2"></p>
             </section>
         </div> <!-- .wrapper -->
     </article>
@@ -158,86 +233,72 @@
         <div class="bcg"></div>
         <div class="wrapper">
             <header class="slideInUp">
-                <a href="https://ihatetomatoes.net/blog/" title="Petr Tichy's Front End Development Blog">
-                    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="iht_logo" x="0" y="0" viewBox="0 0 308.8 152.1" xml:space="preserve" enable-background="new 0 0 308.8 152.1" style="visibility: inherit; opacity: 1;">
-                            <style>
-                            .s0 {
-                                fill: #D74022;
-                            }
-
-                            .s1 {
-                                fill: #4D4D4F;
-                            }
-
-                            .s2 {
-                                fill: none;
-                                stroke-linecap: round;
-                                stroke-miterlimit: 10;
-                                stroke-width: 10;
-                                stroke: #FFF;
-                            }
-
-                            </style>  <path d="M139.7 17.2C106 18.3 78.6 45.7 77.5 79.4 76.9 98 84.2 114.9 96.3 127l91-91C175.2 23.9 158.3 16.6 139.7 17.2z" fill="#D74022"></path>
-                              <path d="M122.3 127c12.1 12.1 29 19.4 47.6 18.8 33.7-1.1 61.1-28.5 62.2-62.2 0.6-18.6-6.7-35.5-18.8-47.6L122.3 127z" fill="#D74022"></path>
-                              <polygon points="238.3 152.1 225.6 139.3 283.4 81.5 225.6 23.8 238.3 11 308.8 81.5 " fill="#4D4D4F"></polygon>
-                              <polygon points="70.5 152.1 0 81.5 70.5 11 83.2 23.8 25.5 81.5 83.2 139.3 " fill="#4D4D4F"></polygon>
-                              <path d="M144.5 30.6" class="s2"></path>
-                              <path d="M132.6 30.4" class="s2"></path>
-                              <path d="M128.6 10.9c0-1.5 0-3 0.1-4.5 0.1-1.4 0.8-3.1 0.3-4.5 -0.8-2.5-4.3-2.6-5.5-0.3 -1.8 4.5-2.5 9.2-2.4 14 -6.7 3.2-17 2-24-0.2 5.1 4 11.2 6.7 18 7.5 -6.5 3-12.5 7-17.6 11.9 13.7-9.2 32.4-7.6 44.4 3.7 -1.3-4.6-3.5-8.7-6.4-12.3 7.3-5.2 16.3-7.4 25.1-6.3 -7-2.1-14.2-3-21.5-2.8 3.2-2.1 6-4.7 8.3-7.7 -6.3 3.5-11.4 4.1-18.5 4.4C128.8 13.2 128.7 11.6 128.6 10.9" fill="#95D600"></path>
-                            </svg>
-                </a>
-                <h1>Do you want to learn ScrollMagic?</h1>
+                <h1>Thank you</h1>
             </header>
             <section>
-                <p class="slideInUp slideInUp2">Explore the source code and start learning ScrollMagic today.</p>
-                <div class="slideInUp slideInUp3">
-                    <a href="https://ihatetomatoes.net/5-days-with-scrollmagic/" class="button">DOWNLOAD FILES</a>
-                </div>
-
+                <p class="slideInUp slideInUp2">We look forward to hearing from you</p>
             </section>
         </div> <!-- .wrapper -->
     </article>
 
 </div> <!-- #main-container -->
 
+<!--
 <div class="footer-container">
     <footer class="wrapper">
-        <h3>2016 &copy; <a href="https://ihatetomatoes.net" target="_blank">Ihatetomatoes.net</a> | <a
-                href="https://twitter.com/ihatetomatoes" target="_blank">@ihatetomatoes</a> | Images by <a
-                href="https://www.flickr.com/photos/markusspiske/albums/with/72157644709775510" target="_blank">Markus
-            Spiske</a> | Animate responsibly!</h3>
+        <h3></h3>
     </footer>
 </div>
+-->
 
 
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-<script src="https://d3js.org/d3.v4.min.js"></script>
-
-<script>window.jQuery || document.write('<script src="js/vendor/jquery-1.11.2.min.js"><\/script>')</script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.13.0/d3.min.js"></script>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.18.2/TweenMax.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.18.2/plugins/TextPlugin.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/3.2.0/imagesloaded.pkgd.min.js"></script>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.5/ScrollMagic.min.js"></script>
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.5/plugins/animation.gsap.js"></script>
+<!--
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.18.2/plugins/ScrollToPlugin.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.5/plugins/debug.addIndicators.min.js"></script>
+-->
 
+
+<script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/flickity/2.1.1/flickity.pkgd.min.js"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.js"></script>
 
-<script src="https://d3js.org/d3.v4.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/es6-promise/4.1.1/es6-promise.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/es6-promise/4.1.1/es6-promise.auto.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/fetch/2.0.4/fetch.min.js"></script>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/video.js/7.0.0/video.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/videojs-contrib-hls/5.14.1/videojs-contrib-hls.min.js"></script>
+
 <script src="js/main.js"></script>
 <script src="js/calendar.js"></script>
 <script>
-    $("#carousel").slick();
     function init() {
-        WHR.calendar.init();
+        WHR.calendar.init().then(function () {
+            $("#calendar").flickity({
+                // cellAlign: "centre",
+                contain: true
+            });
+        });
     }
+
+    $("#carousel").flickity({
+        wrapAround: true
+    });
+</script>
+
+<script>
+    var player = videojs('whr-video');
+    player.play();
 </script>
 
 <script src="//apis.google.com/js/client.js?onload=init"></script>
