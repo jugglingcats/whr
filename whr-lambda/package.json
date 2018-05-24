@@ -10,8 +10,10 @@
   "author": "Alfie Kirkpatrick",
   "license": "ISC",
   "dependencies": {
+    "@types/nodemailer": "^4.6.0",
     "claudia-api-builder": "^4.0.0",
-    "google-auth-library": "^1.4.0"
+    "google-auth-library": "^1.4.0",
+    "nodemailer": "^4.6.5"
   },
   "optionalDependencies": {
     "aws-sdk": "^2.235.1"

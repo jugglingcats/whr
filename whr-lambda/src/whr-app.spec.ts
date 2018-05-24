@@ -1,6 +1,8 @@
 import app from "./whr-app";
 import * as AWS from "aws-sdk";
 
+jest.setTimeout(10000);
+
 const context = {
     done: (e, result) => {
         if (e) {
@@ -63,6 +65,22 @@ describe("whr", function () {
             },
             stageVariables: {
                 skipVerify: true,
+            }
+        }, context).then(done, fail)
+    });
+
+    it("should create a contact and send email", function (done) {
+        app.proxyRouter({
+            requestContext: {
+                resourcePath: "/contact",
+                httpMethod: "PUT"
+            },
+            body: {
+                email: "whr-dev@mailinator.com",
+                name: "Alfie (test)",
+                subject: "Available in August?",
+                body: "I'd love to rent the place in August...",
+                optin: true
             }
         }, context).then(done, fail)
     })

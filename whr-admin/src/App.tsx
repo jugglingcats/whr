@@ -52,7 +52,7 @@ class App extends React.Component<any, AppState> {
     constructor(props: any) {
         super(props);
 
-        const fridays = d3.timeFridays(new Date(), d3.timeFriday.offset(new Date(), 8));
+        const fridays = d3.timeFridays(new Date(), d3.timeFriday.offset(new Date(), 80));
 
         this.state = {
             loaded: false,
