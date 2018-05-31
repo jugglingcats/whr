@@ -48,3 +48,37 @@
 .map-marker path {
   fill: #5f9a5f;
 }
+
+div.contact-form-container {
+  text-align: left !important;
+}
+
+label.contact-form-label {
+  margin-top: 10px;
+  display: block;
+}
+
+input.contact-form-input {
+  color: #06060d;
+  padding: 4px;
+  width: 100%;
+  max-width: 400px;
+}
+
+textarea.contact-form-message {
+  color: #06060d;
+  padding: 4px;
+  width: 100%;
+  height: 200px;
+  max-width: 400px;
+}
+
+button.submit-button {
+  font-size: 20px;
+  color: white;
+  background: #2196F3;
+  border: none;
+  padding: 12px 24px 12px 24px;
+  padding: 12px 24px 12px 24px;
+
+}
