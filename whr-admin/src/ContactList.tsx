@@ -65,13 +65,17 @@ export class ContactList extends React.Component<{ authToken: string }, any> {
             })
         };
 
+        function cmp(a: any, b: any) {
+            return descending(a.created, b.created);
+        }
+
         return this.state.items && <div>
             <p className="App-intro">Enquiries from site contact form</p>
-            <table cellPadding={6} cellSpacing={0}>
+            <table cellPadding={6} cellSpacing={0} className="pure-table">
                 <thead>
                 <tr>
                     <th>Received</th>
-                    <th>Email</th>
+                    <th>Message</th>
                     <th>Responded</th>
                     <th>Actions</th>
                 </tr>
@@ -83,10 +87,17 @@ export class ContactList extends React.Component<{ authToken: string }, any> {
                         <td className="table-centre" colSpan={4}>NO ENQUIRIES FOUND</td>
                     </tr>
                     ||
-                    this.state.items.sort(descending).map((item: any) => [
-                        <tr>
-                            <td className="date table-centre">{moment(item.time).fromNow()}</td>
-                            <td className="table-left"><a href={"mailto:" + item.email}>{item.email}</a></td>
+                    this.state.items.sort(cmp).map((item: any, index: number) => [
+                        <tr key={"r1-" + index}>
+                            <td className="date table-centre">{moment(item.created).fromNow()}</td>
+                            <td className="table-left">
+                                <div className="truncate">
+                                    {item.body}
+                                </div>
+                                <div className="truncate referer">
+                                    {item.referer}
+                                </div>
+                            </td>
                             <td className="table-centre">{item.responded || "No"}</td>
                             <td className="table-centre">
                                 {
@@ -106,13 +117,21 @@ export class ContactList extends React.Component<{ authToken: string }, any> {
                                 <button onClick={() => this.deleteItem(item.id)}>Delete</button>
                             </td>
                         </tr>,
-                        <tr>
+                        <tr className="expanded-contact" key={"r2-" + index}>
                             {this.state.expanded[item.id] &&
-                            <td className="table-left" colSpan={6}>{item.message}</td>
+                            <td className="table-left" colSpan={4}>
+                                <p>Name: {item.name}</p>
+                                <p>Message: {item.body}</p>
+                                <p>Email:<a href={"mailto:" + item.email}>{item.email}</a></p>
+                                <p>Date requested: {item.date || "not specified"}, number of guests: {item.guests || "not specified"}</p>
+                            </td>
                             }
                         </tr>
                     ])
                 }
+                <tr style={{height: "0px"}}>
+                    <td style={{height: "0px"}} colSpan={4}></td>
+                </tr>
                 </tbody>
             </table>
         </div> || <div>Loading...</div>

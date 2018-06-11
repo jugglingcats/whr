@@ -52,7 +52,7 @@ class App extends React.Component<any, AppState> {
     constructor(props: any) {
         super(props);
 
-        const fridays = d3.timeFridays(new Date(), d3.timeFriday.offset(new Date(), 80));
+        const fridays = d3.timeFridays(d3.timeMonth(new Date()), d3.timeFriday.offset(new Date(), 80));
 
         this.state = {
             loaded: false,
@@ -139,25 +139,23 @@ class App extends React.Component<any, AppState> {
         return (
             <div className="App">
                 <header className="App-header">
-                    <h1 className="App-title">White House Ringstead Admin</h1>
-                    {
-                        (this.state.loaded && !this.state.signedIn) && <p>
-                            <button onClick={auth}>Sign In</button>
-                        </p>
-                    }
-                    {
-                        (this.state.loaded && this.state.signedIn) && <p>
-                            <button onClick={signOut}>Sign Out</button>
-                        </p>
-                    }
+                    <h1 className="App-title">
+                        White House Ringstead Admin
+                        {
+                            (this.state.loaded && !this.state.signedIn) && <button className="pure-button signin-button" onClick={auth}>Sign In</button>
+
+                        }
+                        {
+                            (this.state.loaded && this.state.signedIn) && <button className="pure-button signin-button" onClick={signOut}>Sign Out</button>
+                        }
+                    </h1>
                 </header>
                 {
                     (this.state.loaded && this.state.signedIn) && <div className="weeks">
                         <ContactList authToken={this.state.authToken!}/>
-                        <p className="App-intro">
-                            Here you can manage the calendar
-                        </p>
-                        <table cellPadding={6} cellSpacing={0}>
+
+                        <p className="App-intro">Availability and bookings</p>
+                        <table cellPadding={6} cellSpacing={0} className="pure-table">
                             <thead>
                             <tr>
                                 <th>Date</th>

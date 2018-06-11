@@ -2,6 +2,10 @@
   background: hsla(0, 0%, 100%, 0.34);
 }
 
+.flickity-button:disabled {
+  display: none;
+}
+
 #carousel {
   margin-bottom: 30px;
 }
@@ -79,6 +83,28 @@ button.submit-button {
   background: #2196F3;
   border: none;
   padding: 12px 24px 12px 24px;
-  padding: 12px 24px 12px 24px;
+}
 
+button.submit-button.busy {
+  background: grey;
+}
+
+button.submit-button.sent {
+  background: #629230;
+}
+
+#dateSelect {
+  min-width: 200px;
+}
+
+select {
+  color: black;
+}
+
+.contact-form-item {
+  margin-top: 12px;
+}
+
+.contact-form-item > label {
+  margin-right: 12px;
 }

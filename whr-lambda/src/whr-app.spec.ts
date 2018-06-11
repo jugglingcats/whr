@@ -24,10 +24,6 @@ describe("whr", function () {
                 resourcePath: '/contact/list',
                 httpMethod: 'GET'
             },
-            // queryStringParameters: {
-            //     'hub.verify_token': '12345',
-            //     'hub.challenge': 'XHCG'
-            // },
             stageVariables: {
                 skipVerify: true,
             }
@@ -44,10 +40,6 @@ describe("whr", function () {
                 id: "12345",
                 value: "Yes"
             },
-            // queryStringParameters: {
-            //     'hub.verify_token': '12345',
-            //     'hub.challenge': 'XHCG'
-            // },
             stageVariables: {
                 skipVerify: true,
             }
@@ -78,8 +70,10 @@ describe("whr", function () {
             body: {
                 email: "whr-dev@mailinator.com",
                 name: "Alfie (test)",
-                subject: "Available in August?",
                 body: "I'd love to rent the place in August...",
+                referer: "https://www.google.com?q=xyz",
+                date: "1 July, 1980",
+                guests: 100,
                 optin: true
             }
         }, context).then(done, fail)

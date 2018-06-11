@@ -15,14 +15,32 @@ const transport = mailer.createTransport({
     SES: ses
 });
 
-function sendEmail(name: string, email: string, subject: string, body: string) {
+function sendInternalEmail(name: string, email: string, body: string) {
     return new Promise((resolve, reject) => {
         transport.sendMail({
             from: `${name} <alfie@akirkpatrick.com>`,
             to: "whitehouseringstead@gmail.com",
             replyTo: email,
-            subject: `Web contact: ${subject}`,
+            subject: `Web contact: ${name}`,
             text: body
+        }, function (err: any, data: any) {
+            if (err) {
+                console.log("Error sending email: ", err);
+                reject(err);
+            } else {
+                resolve({ok: true});
+            }
+        });
+    });
+}
+
+function sendConfirmationEmail(email: string) {
+    return new Promise((resolve, reject) => {
+        transport.sendMail({
+            from: `White House Ringstead <whitehouseringstead@gmail.com>`,
+            to: email,
+            subject: "Confirmation of your request",
+            text: "Thank you for contacting us. We'll get back to you shortly."
         }, function (err: any, data: any) {
             if (err) {
                 console.log("Error sending email: ", err);
@@ -104,11 +122,29 @@ app.delete('/contact/{id}', async function (request) {
 });
 
 app.put("/contact", async function (request) {
-    console.log("CREATE CONTACT: ", request);
-    // return all_data();
 
-    const {email, name, subject, body, optin} = request.body;
-    await sendEmail(name, email, subject, body);
+    const data = request.body.email ? request.body : JSON.parse(request.body);
+    console.log("CREATE CONTACT: ", data);
+
+    const ddb = new AWS.DynamoDB.DocumentClient();
+    const params = {
+        Item: {
+            id: Math.floor(Math.random() * 1000000000000000).toString(),
+            ...data,
+            optin: data.optin || false,
+            created: new Date().getTime()
+        },
+        TableName: "whr-contact"
+    };
+    const result = await ddb.put(params).promise();
+
+    const {email, name, body, date, guests, optin} = request.body;
+    const msg = `Email: ${email}\nName: ${name}\nDate requested: ${date || "not specified"}\nGuests: ${guests || "not specified"}\nMarketing opt-in: ${optin || false}\n\n${body}`;
+
+    await sendInternalEmail(name, email, msg);
+
+    console.log("Sending confirmation email to: ", email)
+    await sendConfirmationEmail(email);
 });
 
 export default app;

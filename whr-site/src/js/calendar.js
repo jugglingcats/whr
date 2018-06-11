@@ -39,7 +39,7 @@ window.WHR = (function (WHR) {
     function drawCalendar(weeks) {
         var cellMargin = 4, cellSize = 30, priceSize = 64;
 
-        var monthName = d3.timeFormat("%B");
+        var monthTitle = d3.timeFormat("%B %Y");
 
         var months = [];
         var month = [];
@@ -70,7 +70,7 @@ window.WHR = (function (WHR) {
         div.append("div")
             .attr("class", "month-title")
             .text(function (d) {
-                return monthName(d[0].date);
+                return monthTitle(d[0].date);
             });
 
         var width = (cellSize * 7) + (cellMargin * 9) + priceSize;
@@ -115,6 +115,10 @@ window.WHR = (function (WHR) {
             return wk.event && wk.event.properties.booked !== "Yes";
         }
 
+        function offer(wk) {
+            return wk.event && wk.event.properties.offer === "Yes";
+        }
+
         var gweek = gweeks.selectAll("g.week")
             .data(function (d) {
                 return d;
@@ -122,7 +126,7 @@ window.WHR = (function (WHR) {
             .enter()
             .append("g")
             .attr("class", function (wk) {
-                return "week" + (available(wk) ? " week-available" : "");
+                return "week" + (available(wk) ? " week-available" : "") + (offer(wk) ? " week-offer" : "");
             })
             .attr("transform", function (d, i) {
                 return "translate(0 " + (i + 1) * (cellSize + cellMargin) + ")";
@@ -130,8 +134,8 @@ window.WHR = (function (WHR) {
 
         var gprice = gweek.append("g")
             .attr("class", function (wk) {
-                var offer = wk.event && wk.event.properties.offer === "Yes";
-                return "price" + (offer ? " price-offer" : "");
+                // var offer = wk.event && wk.event.properties.offer === "Yes";
+                return "price" + (offer(wk) ? " price-offer" : "");
             })
             .attr("transform", function () {
                 return "translate(" + ((7 * cellSize) + (7 * cellMargin) + cellMargin) + " 0)"
@@ -167,6 +171,31 @@ window.WHR = (function (WHR) {
             .attr("height", cellSize)
             .attr("rx", 1).attr("ry", 1); // rounded corners
 
+        day.append("path")
+            .attr("class", "offer-star")
+            .attr("d", "M 15.000 27.000\n" +
+                "L 19.635 29.266\n" +
+                "L 22.053 24.708\n" +
+                "L 27.135 23.817\n" +
+                "L 26.413 18.708\n" +
+                "L 30.000 15.000\n" +
+                "L 26.413 11.292\n" +
+                "L 27.135 6.183\n" +
+                "L 22.053 5.292\n" +
+                "L 19.635 0.734\n" +
+                "L 15.000 3.000\n" +
+                "L 10.365 0.734\n" +
+                "L 7.947 5.292\n" +
+                "L 2.865 6.183\n" +
+                "L 3.587 11.292\n" +
+                "L 0.000 15.000\n" +
+                "L 3.587 18.708\n" +
+                "L 2.865 23.817\n" +
+                "L 7.947 24.708\n" +
+                "L 10.365 29.266\n" +
+                "L 15.000 27.000\n" +
+                "z")
+
         var text = day.append("text")
             .attr("class", "day-num")
             .attr("x", cellSize / 2)
@@ -176,12 +205,29 @@ window.WHR = (function (WHR) {
             });
     }
 
+    function populateDropdown(fridays) {
+        var weekTitle = d3.timeFormat("%a %e %b %Y");
+
+        var div = d3.select("#dateSelect")
+            .selectAll("option")
+            .data(fridays.filter(function (d) {
+                // console.log(d.event);
+                return d.event && d.event.properties.booked !== "Yes"
+            }))
+            .enter().append("option")
+            .text(function (d) {
+                return weekTitle(d.date);
+            })
+    }
+
     WHR.calendar = {
         init: function () {
             return getCalendar().then(function (fridays) {
                 drawCalendar(fridays);
+                populateDropdown(fridays);
             });
         }
     };
     return WHR;
+
 })(window.WHR || {});

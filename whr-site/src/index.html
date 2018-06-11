@@ -27,6 +27,31 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script>
 
     <link rel="stylesheet" href="css/styles.css">
+
+    <script>
+        function submitForm() {
+            event.preventDefault();
+            event.stopPropagation();
+            event.stopImmediatePropagation();
+            $('#submit').addClass("busy").prop("disabled", true).text("Sending...");
+            var nvps = $('#contact-form').serializeArray();
+            var data = {};
+            for (var n = 0; n < nvps.length; n++) {
+                data[nvps[n].name] = nvps[n].value;
+            }
+            data.referer = document.referrer;
+            var url = "https://ls3yjgl4li.execute-api.eu-west-1.amazonaws.com/latest/contact";
+            fetch(url, {
+                method: "PUT",
+                body: JSON.stringify(data)
+            }).then(function (response) {
+                $('#submit').addClass("sent").removeClass("busy").text("Sent!");
+            });
+            return false;
+        }
+    </script>
+
+
 </head>
 <body class="is-loading">
 <!--[if lt IE 8]>
@@ -118,19 +143,19 @@
 
     <article class="content-block">
         <div id="carousel">
-            <div><img srcset="/img/gallery/pic01-320px.jpg 320w, /img/gallery/pic01-720px.jpg 720w" sizes="(max-width: 1280px) 320px, 720px" src="/img/gallery/pic01.jpg"></div>
-            <div><img srcset="/img/gallery/pic02-320px.jpg 320w, /img/gallery/pic02-720px.jpg 720w" sizes="(max-width: 1280px) 320px, 720px" src="/img/gallery/pic02.jpg"></div>
-            <div><img srcset="/img/gallery/pic03-320px.jpg 320w, /img/gallery/pic03-720px.jpg 720w" sizes="(max-width: 1280px) 320px, 720px" src="/img/gallery/pic03.jpg"></div>
-            <div><img srcset="/img/gallery/pic04-320px.jpg 320w, /img/gallery/pic04-720px.jpg 720w" sizes="(max-width: 1280px) 320px, 720px" src="/img/gallery/pic04.jpg"></div>
-            <div><img srcset="/img/gallery/pic05-320px.jpg 320w, /img/gallery/pic05-720px.jpg 720w" sizes="(max-width: 1280px) 320px, 720px" src="/img/gallery/pic05.jpg"></div>
-            <div><img srcset="/img/gallery/pic06-320px.jpg 320w, /img/gallery/pic06-720px.jpg 720w" sizes="(max-width: 1280px) 320px, 720px" src="/img/gallery/pic06.jpg"></div>
-            <div><img srcset="/img/gallery/pic07-320px.jpg 320w, /img/gallery/pic07-720px.jpg 720w" sizes="(max-width: 1280px) 320px, 720px" src="/img/gallery/pic07.jpg"></div>
-            <div><img srcset="/img/gallery/pic08-320px.jpg 320w, /img/gallery/pic08-720px.jpg 720w" sizes="(max-width: 1280px) 320px, 720px" src="/img/gallery/pic08.jpg"></div>
-            <div><img srcset="/img/gallery/pic09-320px.jpg 320w, /img/gallery/pic09-720px.jpg 720w" sizes="(max-width: 1280px) 320px, 720px" src="/img/gallery/pic09.jpg"></div>
-            <div><img srcset="/img/gallery/pic10-320px.jpg 320w, /img/gallery/pic10-720px.jpg 720w" sizes="(max-width: 1280px) 320px, 720px" src="/img/gallery/pic10.jpg"></div>
-            <div><img srcset="/img/gallery/pic11-320px.jpg 320w, /img/gallery/pic11-720px.jpg 720w" sizes="(max-width: 1280px) 320px, 720px" src="/img/gallery/pic11.jpg"></div>
-            <div><img srcset="/img/gallery/pic12-320px.jpg 320w, /img/gallery/pic12-720px.jpg 720w" sizes="(max-width: 1280px) 320px, 720px" src="/img/gallery/pic12.jpg"></div>
-            <div><img srcset="/img/gallery/pic13-320px.jpg 320w, /img/gallery/pic13-720px.jpg 720w" sizes="(max-width: 1280px) 320px, 720px" src="/img/gallery/pic13.jpg"></div>
+            <div><img srcset="/img/gallery/pic01-320px.jpg 320w, /img/gallery/pic01-720px.jpg 720w" sizes="(max-width: 1280px) 320px, 720px" src="/img/gallery/pic01-720px.jpg"></div>
+            <div><img srcset="/img/gallery/pic02-320px.jpg 320w, /img/gallery/pic02-720px.jpg 720w" sizes="(max-width: 1280px) 320px, 720px" src="/img/gallery/pic02-720px.jpg"></div>
+            <div><img srcset="/img/gallery/pic03-320px.jpg 320w, /img/gallery/pic03-720px.jpg 720w" sizes="(max-width: 1280px) 320px, 720px" src="/img/gallery/pic03-720px.jpg"></div>
+            <div><img srcset="/img/gallery/pic04-320px.jpg 320w, /img/gallery/pic04-720px.jpg 720w" sizes="(max-width: 1280px) 320px, 720px" src="/img/gallery/pic04-720px.jpg"></div>
+            <div><img srcset="/img/gallery/pic05-320px.jpg 320w, /img/gallery/pic05-720px.jpg 720w" sizes="(max-width: 1280px) 320px, 720px" src="/img/gallery/pic05-720px.jpg"></div>
+            <div><img srcset="/img/gallery/pic06-320px.jpg 320w, /img/gallery/pic06-720px.jpg 720w" sizes="(max-width: 1280px) 320px, 720px" src="/img/gallery/pic06-720px.jpg"></div>
+            <div><img srcset="/img/gallery/pic07-320px.jpg 320w, /img/gallery/pic07-720px.jpg 720w" sizes="(max-width: 1280px) 320px, 720px" src="/img/gallery/pic07-720px.jpg"></div>
+            <div><img srcset="/img/gallery/pic08-320px.jpg 320w, /img/gallery/pic08-720px.jpg 720w" sizes="(max-width: 1280px) 320px, 720px" src="/img/gallery/pic08-720px.jpg"></div>
+            <div><img srcset="/img/gallery/pic09-320px.jpg 320w, /img/gallery/pic09-720px.jpg 720w" sizes="(max-width: 1280px) 320px, 720px" src="/img/gallery/pic09-720px.jpg"></div>
+            <div><img srcset="/img/gallery/pic10-320px.jpg 320w, /img/gallery/pic10-720px.jpg 720w" sizes="(max-width: 1280px) 320px, 720px" src="/img/gallery/pic10-720px.jpg"></div>
+            <div><img srcset="/img/gallery/pic11-320px.jpg 320w, /img/gallery/pic11-720px.jpg 720w" sizes="(max-width: 1280px) 320px, 720px" src="/img/gallery/pic11-720px.jpg"></div>
+            <div><img srcset="/img/gallery/pic12-320px.jpg 320w, /img/gallery/pic12-720px.jpg 720w" sizes="(max-width: 1280px) 320px, 720px" src="/img/gallery/pic12-720px.jpg"></div>
+            <div><img srcset="/img/gallery/pic13-320px.jpg 320w, /img/gallery/pic13-720px.jpg 720w" sizes="(max-width: 1280px) 320px, 720px" src="/img/gallery/pic13-720px.jpg"></div>
         </div>
         <!--<div class="wrapper">-->
         <!--
@@ -227,22 +252,54 @@
             </header>
             <section>
                 <div class="slideInUp slideInUp2">
-                    <p>Enter your contact information below and what weeks you're interested in and we'll get back to you.</p>
+                    <p>Enter your contact information below and what weeks you're interested in and we'll get back to you shortly.</p>
 
-                    <label class="contact-form-label">Email</label>
-                    <input class="contact-form-input" type="text">
+                    <form id="contact-form">
 
-                    <label class="contact-form-label">Message</label>
-                    <textarea class="contact-form-message"></textarea>
+                        <label class="contact-form-label">Your email</label>
+                        <input name="email" class="contact-form-input" type="text">
 
-                    <p>Once or twice a year we send updates about the White House and Ringstead if you choose to opt-in below.</p>
-                    <p>
-                        <label class="cb-container">I'd like to receive White House and Ringstead news
-                            <input type="checkbox" checked="checked">
-                            <span class="checkmark"></span>
-                        </label>
-                    </p>
-                    <button class="submit-button">Submit</button>
+                        <label class="contact-form-label">Your name</label>
+                        <input name="name" class="contact-form-input" type="text">
+
+                        <label class="contact-form-label">Message</label>
+                        <textarea name="body" class="contact-form-message"></textarea>
+
+                        <div class="contact-form-item">
+                            <label>Date (optional)</label>
+                            <select name="date" id="dateSelect">
+                                <option>-</option>
+                            </select>
+                        </div>
+
+                        <div class="contact-form-item">
+                            <label>Number of guests (optional)</label>
+                            <select name="guests">
+                                <option>-</option>
+                                <option>1</option>
+                                <option>2</option>
+                                <option>3</option>
+                                <option>4</option>
+                                <option>5</option>
+                                <option>6</option>
+                                <option>7</option>
+                                <option>8</option>
+                                <option>9</option>
+                                <option>10</option>
+                                <option>11</option>
+                                <option>12</option>
+                            </select>
+                        </div>
+
+                        <p>Once or twice a year we send updates about the White House and Ringstead if you choose to opt-in below.</p>
+                        <p>
+                            <label class="cb-container">I'd like to receive occasional White House and Ringstead news
+                                <input name="optin" type="checkbox">
+                                <span class="checkmark"></span>
+                            </label>
+                        </p>
+                        <button id="submit" onclick="submitForm()" class="submit-button">Send</button>
+                    </form>
                 </div>
             </section>
         </div> <!-- .wrapper -->
@@ -276,10 +333,11 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.18.2/TweenMax.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.18.2/plugins/TextPlugin.min.js"></script>
+<!--
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/3.2.0/imagesloaded.pkgd.min.js"></script>
+-->
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.5/ScrollMagic.min.js"></script>
-
 <script src="https://cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.5/plugins/animation.gsap.js"></script>
 <!--
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.18.2/plugins/ScrollToPlugin.min.js"></script>
@@ -289,14 +347,18 @@
 
 <script type="text/javascript"
         src="https://cdnjs.cloudflare.com/ajax/libs/flickity/2.1.1/flickity.pkgd.min.js"></script>
+<!--
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.js"></script>
+-->
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/es6-promise/4.1.1/es6-promise.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/es6-promise/4.1.1/es6-promise.auto.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/fetch/2.0.4/fetch.min.js"></script>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/video.js/7.0.0/video.min.js"></script>
+<!--
 <script src="https://cdnjs.cloudflare.com/ajax/libs/videojs-contrib-hls/5.14.1/videojs-contrib-hls.min.js"></script>
+-->
 
 <script src="js/main.js"></script>
 <script src="js/calendar.js"></script>
@@ -305,13 +367,15 @@
         WHR.calendar.init().then(function () {
             $("#calendar").flickity({
                 // cellAlign: "centre",
-                contain: true
+                contain: true,
+                pageDots: false
             });
         });
     }
 
     $("#carousel").flickity({
-        wrapAround: true
+        wrapAround: true,
+        pageDots: false
     });
 </script>
 
