@@ -17,6 +17,7 @@ const transport = mailer.createTransport({
 
 function sendInternalEmail(name: string, email: string, body: string) {
     return new Promise((resolve, reject) => {
+        console.log("Sending internal email to: ", email);
         transport.sendMail({
             from: `${name} <alfie@akirkpatrick.com>`,
             to: "whitehouseringstead@gmail.com",
@@ -36,9 +37,11 @@ function sendInternalEmail(name: string, email: string, body: string) {
 
 function sendConfirmationEmail(email: string) {
     return new Promise((resolve, reject) => {
+        console.log("Sending confirmation email to: ", email);
         transport.sendMail({
             from: `White House Ringstead <whitehouseringstead@gmail.com>`,
             to: email,
+            replyTo: "whitehouseringstead@gmail.com",
             subject: "Confirmation of your request",
             text: "Thank you for contacting us. We'll get back to you shortly."
         }, function (err: any, data: any) {
@@ -121,6 +124,18 @@ app.delete('/contact/{id}', async function (request) {
     return all_data();
 });
 
+function addEmailOptin(email: string) {
+    const ddb = new AWS.DynamoDB.DocumentClient();
+    const params = {
+        Item: {
+            email: email,
+            created: new Date().getTime()
+        },
+        TableName: "whr-optin"
+    };
+    return ddb.put(params).promise();
+}
+
 app.put("/contact", async function (request) {
 
     const data = request.body.email ? request.body : JSON.parse(request.body);
@@ -138,12 +153,14 @@ app.put("/contact", async function (request) {
     };
     const result = await ddb.put(params).promise();
 
-    const {email, name, body, date, guests, optin} = request.body;
+    if (data.optin) {
+        await addEmailOptin(data.email);
+    }
+
+    const {email, name, body, date, guests, optin} = data;
     const msg = `Email: ${email}\nName: ${name}\nDate requested: ${date || "not specified"}\nGuests: ${guests || "not specified"}\nMarketing opt-in: ${optin || false}\n\n${body}`;
 
     await sendInternalEmail(name, email, msg);
-
-    console.log("Sending confirmation email to: ", email)
     await sendConfirmationEmail(email);
 });
 

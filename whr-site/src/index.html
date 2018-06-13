@@ -33,19 +33,39 @@
             event.preventDefault();
             event.stopPropagation();
             event.stopImmediatePropagation();
-            $('#submit').addClass("busy").prop("disabled", true).text("Sending...");
+
+            var $submit = $('#submit');
+            $submit.addClass("busy").prop("disabled", true).text("Sending...");
+
             var nvps = $('#contact-form').serializeArray();
             var data = {};
             for (var n = 0; n < nvps.length; n++) {
                 data[nvps[n].name] = nvps[n].value;
             }
-            data.referer = document.referrer;
+            data.referer = document.referrer || "unknown referrer";
             var url = "https://ls3yjgl4li.execute-api.eu-west-1.amazonaws.com/latest/contact";
             fetch(url, {
                 method: "PUT",
                 body: JSON.stringify(data)
             }).then(function (response) {
-                $('#submit').addClass("sent").removeClass("busy").text("Sent!");
+                $submit.removeClass("busy");
+                if (response.status === 200) {
+                    $submit.addClass("sent").text("Sent!");
+                    registerContact();
+                } else {
+                    $submit.addClass("send-failed").text("Failed - check form and try again");
+                    response.json().then(function (d) {
+                        console.log("Register contact fail", d);
+                        registerContactFail(d.errorMessage)
+                    })
+                }
+                setTimeout(function () {
+                    $submit
+                        .removeClass("sent")
+                        .removeClass("send-failed")
+                        .prop("disabled", false)
+                        .text("Send");
+                }, 5000);
             });
             return false;
         }
@@ -143,19 +163,32 @@
 
     <article class="content-block">
         <div id="carousel">
-            <div><img srcset="/img/gallery/pic01-320px.jpg 320w, /img/gallery/pic01-720px.jpg 720w" sizes="(max-width: 1280px) 320px, 720px" src="/img/gallery/pic01-720px.jpg"></div>
-            <div><img srcset="/img/gallery/pic02-320px.jpg 320w, /img/gallery/pic02-720px.jpg 720w" sizes="(max-width: 1280px) 320px, 720px" src="/img/gallery/pic02-720px.jpg"></div>
-            <div><img srcset="/img/gallery/pic03-320px.jpg 320w, /img/gallery/pic03-720px.jpg 720w" sizes="(max-width: 1280px) 320px, 720px" src="/img/gallery/pic03-720px.jpg"></div>
-            <div><img srcset="/img/gallery/pic04-320px.jpg 320w, /img/gallery/pic04-720px.jpg 720w" sizes="(max-width: 1280px) 320px, 720px" src="/img/gallery/pic04-720px.jpg"></div>
-            <div><img srcset="/img/gallery/pic05-320px.jpg 320w, /img/gallery/pic05-720px.jpg 720w" sizes="(max-width: 1280px) 320px, 720px" src="/img/gallery/pic05-720px.jpg"></div>
-            <div><img srcset="/img/gallery/pic06-320px.jpg 320w, /img/gallery/pic06-720px.jpg 720w" sizes="(max-width: 1280px) 320px, 720px" src="/img/gallery/pic06-720px.jpg"></div>
-            <div><img srcset="/img/gallery/pic07-320px.jpg 320w, /img/gallery/pic07-720px.jpg 720w" sizes="(max-width: 1280px) 320px, 720px" src="/img/gallery/pic07-720px.jpg"></div>
-            <div><img srcset="/img/gallery/pic08-320px.jpg 320w, /img/gallery/pic08-720px.jpg 720w" sizes="(max-width: 1280px) 320px, 720px" src="/img/gallery/pic08-720px.jpg"></div>
-            <div><img srcset="/img/gallery/pic09-320px.jpg 320w, /img/gallery/pic09-720px.jpg 720w" sizes="(max-width: 1280px) 320px, 720px" src="/img/gallery/pic09-720px.jpg"></div>
-            <div><img srcset="/img/gallery/pic10-320px.jpg 320w, /img/gallery/pic10-720px.jpg 720w" sizes="(max-width: 1280px) 320px, 720px" src="/img/gallery/pic10-720px.jpg"></div>
-            <div><img srcset="/img/gallery/pic11-320px.jpg 320w, /img/gallery/pic11-720px.jpg 720w" sizes="(max-width: 1280px) 320px, 720px" src="/img/gallery/pic11-720px.jpg"></div>
-            <div><img srcset="/img/gallery/pic12-320px.jpg 320w, /img/gallery/pic12-720px.jpg 720w" sizes="(max-width: 1280px) 320px, 720px" src="/img/gallery/pic12-720px.jpg"></div>
-            <div><img srcset="/img/gallery/pic13-320px.jpg 320w, /img/gallery/pic13-720px.jpg 720w" sizes="(max-width: 1280px) 320px, 720px" src="/img/gallery/pic13-720px.jpg"></div>
+            <div><img srcset="/img/gallery/pic01-320px.jpg 320w, /img/gallery/pic01-720px.jpg 720w" sizes="(max-width: 1280px) 320px, 720px" src="/img/gallery/pic01-720px.jpg">
+            </div>
+            <div><img srcset="/img/gallery/pic02-320px.jpg 320w, /img/gallery/pic02-720px.jpg 720w" sizes="(max-width: 1280px) 320px, 720px" src="/img/gallery/pic02-720px.jpg">
+            </div>
+            <div><img srcset="/img/gallery/pic03-320px.jpg 320w, /img/gallery/pic03-720px.jpg 720w" sizes="(max-width: 1280px) 320px, 720px" src="/img/gallery/pic03-720px.jpg">
+            </div>
+            <div><img srcset="/img/gallery/pic04-320px.jpg 320w, /img/gallery/pic04-720px.jpg 720w" sizes="(max-width: 1280px) 320px, 720px" src="/img/gallery/pic04-720px.jpg">
+            </div>
+            <div><img srcset="/img/gallery/pic05-320px.jpg 320w, /img/gallery/pic05-720px.jpg 720w" sizes="(max-width: 1280px) 320px, 720px" src="/img/gallery/pic05-720px.jpg">
+            </div>
+            <div><img srcset="/img/gallery/pic06-320px.jpg 320w, /img/gallery/pic06-720px.jpg 720w" sizes="(max-width: 1280px) 320px, 720px" src="/img/gallery/pic06-720px.jpg">
+            </div>
+            <div><img srcset="/img/gallery/pic07-320px.jpg 320w, /img/gallery/pic07-720px.jpg 720w" sizes="(max-width: 1280px) 320px, 720px" src="/img/gallery/pic07-720px.jpg">
+            </div>
+            <div><img srcset="/img/gallery/pic08-320px.jpg 320w, /img/gallery/pic08-720px.jpg 720w" sizes="(max-width: 1280px) 320px, 720px" src="/img/gallery/pic08-720px.jpg">
+            </div>
+            <div><img srcset="/img/gallery/pic09-320px.jpg 320w, /img/gallery/pic09-720px.jpg 720w" sizes="(max-width: 1280px) 320px, 720px" src="/img/gallery/pic09-720px.jpg">
+            </div>
+            <div><img srcset="/img/gallery/pic10-320px.jpg 320w, /img/gallery/pic10-720px.jpg 720w" sizes="(max-width: 1280px) 320px, 720px" src="/img/gallery/pic10-720px.jpg">
+            </div>
+            <div><img srcset="/img/gallery/pic11-320px.jpg 320w, /img/gallery/pic11-720px.jpg 720w" sizes="(max-width: 1280px) 320px, 720px" src="/img/gallery/pic11-720px.jpg">
+            </div>
+            <div><img srcset="/img/gallery/pic12-320px.jpg 320w, /img/gallery/pic12-720px.jpg 720w" sizes="(max-width: 1280px) 320px, 720px" src="/img/gallery/pic12-720px.jpg">
+            </div>
+            <div><img srcset="/img/gallery/pic13-320px.jpg 320w, /img/gallery/pic13-720px.jpg 720w" sizes="(max-width: 1280px) 320px, 720px" src="/img/gallery/pic13-720px.jpg">
+            </div>
         </div>
         <!--<div class="wrapper">-->
         <!--
@@ -381,27 +414,36 @@
 
 <script>
     var player = videojs('whr-video');
-    player.play();
+    // player.play(); // TODO: put back in?
 </script>
 
 <script src="//apis.google.com/js/client.js?onload=init"></script>
 
-<!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-120715589-1"></script>
 <script>
-    (function (b, o, i, l, e, r) {
-        b.GoogleAnalyticsObject = l;
-        b[l] || (b[l] =
-            function () {
-                (b[l].q = b[l].q || []).push(arguments)
-            });
-        b[l].l = +new Date;
-        e = o.createElement(i);
-        r = o.getElementsByTagName(i)[0];
-        e.src = '//www.google-analytics.com/analytics.js';
-        r.parentNode.insertBefore(e, r)
-    }(window, document, 'script', 'ga'));
-    ga('create', 'UA-XXXXX-X', 'auto');
-    ga('send', 'pageview');
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+        dataLayer.push(arguments);
+    }
+
+    gtag('js', new Date());
+
+    gtag('config', 'UA-120715589-1', {
+        cookie_domain: "none"
+    });
+
+    function registerContact() {
+        gtag("event", "contact");
+    }
+
+    function registerContactFail(msg) {
+        gtag("event", "contact-fail", {
+            event_label: msg
+        });
+    }
 </script>
+
 </body>
 </html>
